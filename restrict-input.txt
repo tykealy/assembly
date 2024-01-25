@@ -1,0 +1,151 @@
+.model small
+.data 
+ input1 db 0
+ input2 db 0
+ result db 0 
+ 
+ input1msg db 13, 10,'Please input first character : $'
+ input2msg db 13, 10,'Please input second character: $'
+ input1msg1 db 13, 10,'Please input first character again : $'
+ input2msg1 db 13, 10,'Please input second character again : $'
+ resultmsg db 13, 10,'The sum of INPUT1 and INPUT2 is : $'
+ 
+.code
+main proc  
+        
+ top: 
+      
+ mov cx, @data
+ mov ds, cx 
+ 
+ ;output msg1
+ lea dx, input1msg
+ mov ah, 9h
+ int 21h 
+ 
+ ;;input 1
+ mov ah, 1
+ mov al, input1
+ int 21h 
+ 
+ cmp al, 113
+ jz stop
+ 
+ cmp al, 58
+ jnc retry1 
+ 
+ cmp al, 47
+ jc retry2         
+           
+ ;;mov al to input1
+ mov input1, al 
+ 
+ ;output msg2
+ lea dx, input2msg 
+ mov ah, 9h
+ int 21h 
+ 
+ ;;input 2
+ mov ah,1
+ mov al, input2
+ int 21h 
+ 
+ cmp al, 58
+ jnc retry1 
+ 
+ cmp al, 47
+ jc retry2 
+ 
+ 
+ ;;add 2 input
+ add al, input1 
+ 
+ ;;convert result to string number 
+ sub al, 48 ; al = al - 48
+ 
+ ;;move al to result
+ mov result, al 
+ 
+ ;output resultmsg
+ lea dx, resultmsg 
+ mov ah, 9h
+ int 21h
+ 
+ ;;output the result
+ mov ah,2h
+ mov dl, result
+ int 21h
+ 
+ jmp top 
+ 
+ retry1: 
+ 
+ ;output msg1
+ lea dx, input1msg1
+ mov ah, 9h
+ int 21h 
+ 
+  ;;input 1
+ mov ah, 1
+ mov al, input1
+ int 21h 
+ 
+ cmp al, 113
+ jz stop
+ 
+ cmp al, 58
+ jnc retry1 
+ 
+ cmp al, 47
+ jc retry2         
+           
+ ;;mov al to input1
+ mov input1, al 
+ 
+ retry2:
+ 
+ ;output msg2
+ lea dx, input2msg1 
+ mov ah, 9h
+ int 21h 
+ 
+ ;;input 2
+ mov ah,1
+ mov al, input2
+ int 21h 
+ 
+ cmp al, 58
+ jnc retry1 
+ 
+ cmp al, 47
+ jc retry2 
+ 
+ 
+ ;;add 2 input
+ add al, input1 
+ 
+ ;;convert result to string number 
+ sub al, 48 ; al = al - 48
+ 
+ ;;move al to result
+ mov result, al 
+ 
+ ;output resultmsg
+ lea dx, resultmsg 
+ mov ah, 9h
+ int 21h
+ 
+ ;;output the result
+ mov ah,2h
+ mov dl, result
+ int 21h 
+          
+ jmp top
+ 
+ stop:
+ 
+ hlt
+ 
+ 
+main endp
+end main

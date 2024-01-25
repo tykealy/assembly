@@ -1,0 +1,28 @@
+.data
+
+input db 0 
+converted db 0
+text1 db "="
+
+.code      
+mov dx,@data
+
+mov ah,1
+int 21h
+
+mov input,al
+
+sub al,48     
+mov converted,al
+
+mov ah,2
+mov dl,text1
+int 21h 
+
+mov dl,converted
+int 21h
+ 
+
+
+
+

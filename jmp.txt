@@ -1,0 +1,49 @@
+.model small
+.data
+
+var1 DB 10,13,'Please input a number: $ ' 
+var2 DB 10,13,'Please input second number: $'
+var3 DB 10,13,'The added value is: $' 
+input1 DB 0 
+input2 DB 0 
+added DB 0
+.code
+main proc    
+    mov AX, @data
+    mov DS, AX 
+    my_label:
+    LEA DX, var1          
+    mov ah,9h
+    int 21H 
+    
+    mov AH,1
+    int 21H 
+    mov input1,al   
+    sub input1,48
+    
+    LEA DX, var2          
+    mov ah,9h
+    int 21H 
+    
+    mov ah,1
+    int 21h
+                
+    mov input2, al  
+    sub input2,48 
+    
+    mov bl,input2
+    
+    add bl,input1 
+    mov added, bl
+    
+    lea dx, var3
+    mov ah,9h
+    int 21h 
+    
+    mov dl,added 
+    add dl,48
+    mov ah,2
+    int 21h
+    jmp my_label
+ main endp
+end main

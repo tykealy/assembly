@@ -1,0 +1,32 @@
+.model small
+.data
+
+var1 DB 'Please input a character: $ ' 
+var2 DB 10,13,'Your Input is: $' 
+input DB 0 
+.code
+main proc    
+    mov AX, @data
+    mov DS, AX 
+    
+    LEA DX, var1          
+    mov ah,9h
+    int 21H 
+    
+    mov AH,1
+    int 21H 
+                
+    mov input, al
+    
+    
+    LEA DX, var2  
+    mov ah,9h
+    int 21H 
+    
+    mov dl,input
+    mov ah ,2
+    int 21H
+
+    
+   
+    

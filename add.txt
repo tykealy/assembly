@@ -1,0 +1,12 @@
+.data
+
+var1 db 6
+
+.code    
+
+mov cx, @data
+add var1, 48
+
+mov dl,var1
+mov ah,2
+int 21h

@@ -1,0 +1,28 @@
+main proc
+    
+    MOV AH, 2
+    MOV DL, 84
+    INT 21H
+    
+  
+    MOV DL, 121
+    INT 21H 
+   
+    MOV DL, 107
+    INT 21H   
+    
+    MOV DL, 101
+    INT 21H         
+    
+    MOV DL, 97
+    INT 21H
+    
+    MOV DL, 32
+    INT 21H  
+    
+    MOV DL, 4cH
+    INT 21H  
+    
+    MOV DL, 121
+    INT 21H    
+    
